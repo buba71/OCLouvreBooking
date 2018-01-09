@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Front;
 
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 
-class FrontendController extends Controller
+class MainController extends Controller
 {
     /**
      * @return Response
@@ -15,5 +15,7 @@ class FrontendController extends Controller
     {
         return $this->render('base.html.twig');
     }
+
+
 }
 
