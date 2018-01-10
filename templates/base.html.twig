@@ -10,9 +10,6 @@
         {% endblock %}
     </head>
     <body>
-
-    {% block body %}
-
         <div class="container-fluid" id="navigation">
             <nav class="navbar navbar-inverse">
                 <!-- Brand and toggle get grouped for better mobile display -->
@@ -23,7 +20,9 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#"><img id="logo" src="{{ asset('/build/images/logo.ac93da04.png') }}" alt="logo"></a>
+                    <a class="navbar-brand" href="{{ path('index') }}">
+                        <img id="logo" src="{{ asset('/build/images/logo.ac93da04.png') }}" alt="logo">
+                    </a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
@@ -33,14 +32,14 @@
                         <li><a href="#">EXPOSITIONS<br/> & ACTUALITES</a> </li>
                         <li><a href="#">OEUVRES<br/> & PALAIS</a></li>
                         <li><a href="#">ARTS<br/> & EDUCATION</a></li>
-                        <li><a href="#">BILLETTERIE</a> </li>
+                        <li><a href="{{ path('booking_homepage') }}">BILLETTERIE</a> </li>
                     </ul>
                 </div><!-- /.navbar-collapse -->
         <!-- /.container-fluid -->
         </nav>
         </div>
 
-
+{% block content %}
         <div class="container-fluid" id="homepage-content">
             <div class="row" id="carousel">
                 <div class="col-sm-12">
@@ -60,7 +59,9 @@
                                 <img src="{{ asset ('/build/images/1.40cae0e3.jpg') }}" class="img-responsive" alt="image 1">
                                 <div class="carousel-caption">
                                     <h3>Commander vos billets en ligne! </h3>
-                                    <button class="btn btn-default">Billetterie</button><br/><br/>
+                                    <a href="{{ path('booking_homepage') }}">
+                                        <button class="btn btn-default">Billetterie</button>
+                                    </a><br/><br/>
                                     <P>
                                         Ouvert tous les jours de 09h00 à 18h00 sauf le mardi.<br/>
                                         Fermeture les 1er mai, 1er novembre et 25 décembre.
@@ -104,7 +105,9 @@
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pharetra varius quam sit amet vulputate.
                             Quisque mauris augue, molestie tincidunt condimentum vitae, gravida a libero. Aenean sit amet felis
                             dolor, in sagittis nisi. Sed ac orci quis tortor imperdiet venenatis. Duis elementum auctor accumsan.
-                            Aliquam in felis sit amet augue.</div>
+                            Aliquam in felis sit amet augue.<br/><br/>
+                            <button type="button" class="btn btn-default">Lire la suite ></button>
+                        </div>
                     </div>
                 </div>
                 <div class="col-sm-4">
@@ -114,7 +117,9 @@
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pharetra varius quam sit amet vulputate.
                             Quisque mauris augue, molestie tincidunt condimentum vitae, gravida a libero. Aenean sit amet felis
                             dolor, in sagittis nisi. Sed ac orci quis tortor imperdiet venenatis. Duis elementum auctor accumsan.
-                            Aliquam in felis sit amet augue.</div>
+                            Aliquam in felis sit amet augue.<br/><br/>
+                            <button type="button" class="btn btn-default">Lire la suite ></button>
+                        </div>
                     </div>
                 </div>
                 <div class="col-sm-4">
@@ -124,20 +129,23 @@
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pharetra varius quam sit amet vulputate.
                             Quisque mauris augue, molestie tincidunt condimentum vitae, gravida a libero. Aenean sit amet felis
                             dolor, in sagittis nisi. Sed ac orci quis tortor imperdiet venenatis. Duis elementum auctor accumsan.
-                            Aliquam in felis sit amet augue.</div>
+                            Aliquam in felis sit amet augue.<br/><br/>
+                            <button type="button" class="btn btn-default">Lire la suite ></button>
+                        </div>
                     </div>
                 </div>
 
             </div>
         </div>
         </div>
+    {% endblock %}
 
         <footer>
             <div class="panel-footer" style="text-align: right">
                 <span>Copyright<i class="fa fa-copyright fa-lg"></i></span>
             </div>
         </footer>
-    {% endblock %}
+
 
 
     {% block javascripts %}

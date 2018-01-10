@@ -4,7 +4,6 @@
     margin-bottom: 0;
 
 }
-
 .navbar-brand
 {
     padding-left: 10px;
@@ -13,45 +12,33 @@
     position: relative;
     z-index: 6;
 }
-
 .navbar-collapse
 {
     padding:0;
 }
-
 .navbar-nav
 {
     font-size: smaller;
 }
-
-
 #logo
 {
     width: auto;
     height: 85px;
     margin-top: 15px;
     margin-left: 20px;
-
 }
-
 #navigation
 {
     padding: 0;
 }
-
 #homepage-content
 {
     padding: 0;
     height: 100%;
 }
-
 #content{
     margin: 20px;
 }
-
-
-
-
 .carousel .item>img
 {
 
@@ -61,17 +48,14 @@
    height: 100%;
 
 }
-
 .carousel-caption
 {
     text-align: left;
     top: 20px;
 }
-
 .btn-default
 {
     background-color: white;
-    border-color: white;
     border-radius: 0;
     color: black;
 }
@@ -80,12 +64,20 @@
     background-color: black;
     color: white;
 }
-
 .panel-footer
 {
     height: 100px;
     background-color: black;
     color: white;
+}
+#booking-stageone
+{
+    margin-top: 50px;
+    min-height: 400px;
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
 }
 
 

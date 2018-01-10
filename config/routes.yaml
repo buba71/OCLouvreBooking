@@ -1,3 +1,7 @@
 index:
     path: /
     controller: App\Controller\Front\MainController::index
+
+booking_homepage:
+    path: /booking
+    controller: App\Controller\Front\TicketingController::booking
