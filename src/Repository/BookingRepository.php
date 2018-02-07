@@ -2,23 +2,23 @@
 
 namespace App\Repository;
 
-use App\Entity\Order;
+use App\Entity\Booking;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
-class OrderRepository extends ServiceEntityRepository
+class BookingRepository extends ServiceEntityRepository
 {
     public function __construct(RegistryInterface $registry)
     {
-        parent::__construct($registry, Order::class);
+        parent::__construct($registry, Booking::class);
     }
 
     /*
     public function findBySomething($value)
     {
-        return $this->createQueryBuilder('o')
-            ->where('o.something = :value')->setParameter('value', $value)
-            ->orderBy('o.id', 'ASC')
+        return $this->createQueryBuilder('b')
+            ->where('b.something = :value')->setParameter('value', $value)
+            ->orderBy('b.id', 'ASC')
             ->setMaxResults(10)
             ->getQuery()
             ->getResult()

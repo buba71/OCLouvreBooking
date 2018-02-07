@@ -5,3 +5,13 @@ index:
 booking_homepage:
     path: /booking
     controller: App\Controller\Front\TicketingController::booking
+
+booking_register:
+    path: /booking/register/{id}
+    controller: App\Controller\Front\TicketingController::register
+    requirements:
+        id: \d+
+
+booking_payment:
+    path: /booking/payment
+    controller: App\Controller\Front\TicketingController::payment

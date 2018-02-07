@@ -13,6 +13,7 @@ Encore
 
     // uncomment to define the assets of the project
     .addEntry('js/app', './assets/js/app.js')
+
     // adding images
     .addEntry('png/logo','./assets/images/logo.png')
     .addEntry('jpg/1','./assets/images/1.jpg')
@@ -27,6 +28,12 @@ Encore
 
     // uncomment for legacy applications that require $/jQuery as a global variable
     .autoProvidejQuery()
+    .autoProvideVariables({
+        $: 'jquery',
+        jQuery: 'jquery',
+        'window.jQuery': 'jquery'
+    })
+
 ;
 
 module.exports = Encore.getWebpackConfig();

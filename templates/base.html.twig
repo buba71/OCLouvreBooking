@@ -3,10 +3,11 @@
     <head>
         <meta charset="UTF-8">
 
-        <title>{% block title %}{% endblock %}</title>
+        <title>{% block title %}Accueil{% endblock %}</title>
         {% block stylesheets %}
             <link rel="stylesheet" href="{{ asset('build/css/app.css') }}">
             <link rel="stylesheet" href="{{ asset('build/css/custom.css') }}">
+         <!--   <link rel="stylesheet" href="{{ asset('build/css/bootstrap-datepicker3.css') }}"> -->
         {% endblock %}
     </head>
     <body>
@@ -149,7 +150,7 @@
 
 
     {% block javascripts %}
-        <script src="{{ asset('build/js/app.js') }}"></script>
+        <script src="{{ asset('/build/js/app.js') }}"></script>
     {% endblock %}
     </body>
 </html>

@@ -2,44 +2,55 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\OrderRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\BookingRepository")
  */
-class Order
+class Booking
 {
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
-     * @ORM\Column(type="integer", name="order_id")
+     * @ORM\Column(type="integer")
      */
     private $id;
 
     /**
-     * @ORM\Column(type="datetime", name="order_bookingDate")
+     * @ORM\OneToMany(targetEntity="App\Entity\Ticket", mappedBy="booking", cascade={"persist"})
      */
-    private $bookingDate;
+    private $tickets;
 
     /**
-     * @ORM\Column(type="string",length=10, name="order_ticketCategory")
+     * @ORM\Column(type="date", name="booking_date")
+     */
+    private $booking_date;
+
+    /**
+     * @ORM\Column(type="boolean", name="booking_ticketCategory")
      */
     private $ticketCategory;
 
     /**
-     * @ORM\Column(type="string", length=30, name="order_userMail")
+     * @ORM\Column(type="string", name="booking_userMail")
      */
     private $userMail;
 
     /**
-     * @ORM\Column(type="integer", length=3, name="order_ticketQuantity", unique=true)
+     * @ORM\Column(type="integer", name="booking_ticketQuantity")
      */
     private $ticketQuantity;
 
     /**
-     * @ORM\Column(type="integer", length=5, name="order_amount")
+     * @ORM\Column(type="integer", name="booking_amount")
      */
     private $amount;
+
+    public function __construct()
+    {
+        $this->tickets = new ArrayCollection();
+    }
 
     /**
      * @return mixed
@@ -62,15 +73,15 @@ class Order
      */
     public function getBookingDate()
     {
-        return $this->bookingDate;
+        return $this->booking_date;
     }
 
     /**
-     * @param mixed $bookingDate
+     * @param mixed $booking_date
      */
-    public function setBookingDate($bookingDate): void
+    public function setBookingDate($booking_date): void
     {
-        $this->bookingDate = $bookingDate;
+        $this->booking_date = $booking_date;
     }
 
     /**
@@ -136,6 +147,30 @@ class Order
     {
         $this->amount = $amount;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getTickets()
+    {
+        return $this->tickets;
+    }
+
+    public function addTicket(Ticket $ticket)
+    {
+        $this->tickets[] = $ticket;
+        //  lie la réservation avec le Billet
+        $ticket->setBooking($this);
+
+        return $this;
+    }
+
+    public function removeTicket(Ticket $ticket)
+    {
+        $this->tickets->removeElement($ticket);
+    }
+
+
 
 
 

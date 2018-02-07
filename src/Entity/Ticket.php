@@ -12,29 +12,35 @@ class Ticket
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
-     * @ORM\Column(type="integer", name="ticket_id")
+     * @ORM\Column(type="integer")
      */
     private $id;
 
     /**
-     * @ORM\Column(type="string",length=30, name="ticket_guestFirstName")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Booking", inversedBy="tickets")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $booking;
+
+    /**
+     * @ORM\Column(type="string", name="ticket_GuestFirstName")
      */
     private $guestFirstName;
 
     /**
-     * @ORM\Column(type="string",length=30, name="ticket_guestLastName")
+     * @ORM\Column(type="string", name="ticket_GuestLastName")
      */
     private $guestLastName;
 
     /**
-     * @ORM\Column(type="string",length=30, name="ticket_guestCountry")
+     * @ORM\Column(type="string", name="ticket_guestCountry")
      */
     private $guestCountry;
 
     /**
-     * @ORM\Column(type="date", name="ticket_birthDate")
+     * @ORM\Column(type="date", name="ticket_guestBirthDate")
      */
-    private $birthDate;
+    private $guestBirthDate;
 
     /**
      * @ORM\Column(type="boolean", name="ticket_discount")
@@ -108,17 +114,17 @@ class Ticket
     /**
      * @return mixed
      */
-    public function getBirthDate()
+    public function getGuestBirthDate()
     {
-        return $this->birthDate;
+        return $this->guestBirthDate;
     }
 
     /**
-     * @param mixed $birthDate
+     * @param mixed $guestBirthDate
      */
-    public function setBirthDate($birthDate): void
+    public function setGuestBirthDate($guestBirthDate): void
     {
-        $this->birthDate = $birthDate;
+        $this->guestBirthDate = $guestBirthDate;
     }
 
     /**
@@ -137,7 +143,21 @@ class Ticket
         $this->discount = $discount;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getBooking()
+    {
+        return $this->booking;
+    }
 
+    /**
+     * @param mixed $booking
+     */
+    public function setBooking(Booking $booking): void
+    {
+        $this->booking = $booking;
+    }
 
 
 }

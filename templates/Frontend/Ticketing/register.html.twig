@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Register {% endblock %}
+
+{% block content %}
+
+    <div class="well" style="height: 300px;margin-top: 50px;">
+        <div id ="panier" data-ticket = "{{ ticketQuantity }}">
+            <h3>PANIER : {{ ticketQuantity }} </h3>
+        </div>
+
+        {{ form_start(form) }}
+        {{ form_label(form.tickets) }}
+        {{ form_widget(form.tickets) }}
+        {{ form_end(form) }}
+
+
+    </div>
+
+
+{% endblock %}
+
+{% block javascripts %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var $collectionHolder = $('div#tickets_tickets');
+            var tickets = $('#panier').attr('data-ticket');
+             //$collectionHolder.find(':input').length;
+
+            if (tickets == 0) {
+                alert('Votre panier est vide!');
+            }else{
+                for(i=0;i<tickets;i++){
+                    var index = i;
+                    addTicket($collectionHolder);
+                }
+            }
+
+
+            function addTicket($collectionHolder){
+                var template = $collectionHolder.attr('data-prototype').replace(/__name__label__/g, 'ticket n' + (index)).replace(/__name__/g, index);
+                var $prototype = $(template);
+                $collectionHolder.append($prototype);
+            }
+
+
+        });
+
+    </script>
+
+{% endblock %}
+
