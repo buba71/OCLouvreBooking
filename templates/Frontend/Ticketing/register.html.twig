@@ -27,24 +27,17 @@
         $(document).ready(function() {
             var $collectionHolder = $('div#tickets_tickets');
             var tickets = $('#panier').attr('data-ticket');
-             //$collectionHolder.find(':input').length;
-
-            if (tickets == 0) {
-                alert('Votre panier est vide!');
-            }else{
-                for(i=0;i<tickets;i++){
-                    var index = i;
-                    addTicket($collectionHolder);
+            // Construct form collection for (i) forms of ticket entity
+            for(i=0;i<tickets;i++){
+                var index = i;
+                addTicket($collectionHolder);
                 }
-            }
-
 
             function addTicket($collectionHolder){
                 var template = $collectionHolder.attr('data-prototype').replace(/__name__label__/g, 'ticket n' + (index)).replace(/__name__/g, index);
                 var $prototype = $(template);
                 $collectionHolder.append($prototype);
             }
-
 
         });
 

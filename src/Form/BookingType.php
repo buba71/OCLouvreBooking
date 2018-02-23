@@ -9,6 +9,7 @@ use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -22,7 +23,8 @@ class BookingType extends AbstractType
                 'label'  => 'Date de réservation',
                 'widget' => 'single_text',
                 'html5'  => false,
-                'attr'   => array('class' => 'datepicker')
+                'attr'   => array('class' => 'datepicker'),
+                'format' => 'dd-MM-yyyy'
             ))
             ->add('ticketCategory',ChoiceType::class, array(
                 'choices' => array(

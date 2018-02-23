@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use App\Validator\CheckDate;
+use App\Validator\CheckOverTickets;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -24,6 +26,7 @@ class Booking
 
     /**
      * @ORM\Column(type="date", name="booking_date")
+     * @CheckDate()
      */
     private $booking_date;
 
@@ -39,6 +42,7 @@ class Booking
 
     /**
      * @ORM\Column(type="integer", name="booking_ticketQuantity")
+     * @CheckOverTickets()
      */
     private $ticketQuantity;
 

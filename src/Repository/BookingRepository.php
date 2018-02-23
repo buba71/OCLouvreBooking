@@ -13,16 +13,22 @@ class BookingRepository extends ServiceEntityRepository
         parent::__construct($registry, Booking::class);
     }
 
-    /*
-    public function findBySomething($value)
+
+    public function findBookingByDate($bookingDate)
     {
-        return $this->createQueryBuilder('b')
-            ->where('b.something = :value')->setParameter('value', $value)
-            ->orderBy('b.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
+        $qb =  $this->createQueryBuilder('b');
+
+        $qb
+            ->innerJoin('b.tickets', 't')
+            ->addSelect('t')
         ;
+        $qb
+            ->where('b.booking_date = :bookingDate')
+            ->setParameter('bookingDate', $bookingDate);
+
+        return $qb
+            ->getQuery()
+            ->getResult();
     }
-    */
+
 }

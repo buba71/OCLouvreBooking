@@ -38,6 +38,7 @@
 {% endblock %}
 
 {% block javascripts %}
+    {{ parent() }}
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="{{ asset('build/js/bootstrap-datepicker.js') }}"></script>
@@ -49,8 +50,11 @@
             // datepicker parameters
             $('.datepicker').datepicker({
                 language: 'fr',
-                format: 'yyyy-mm-dd',
-                orientation: 'top right'
+                format: 'dd-mm-yyyy',
+                orientation: 'top right',
+                startDate: 'today',
+                todayHighlight: 'true',
+                daysOfWeekDisabled: '2'
             });
 
             // Add a ticket to the cart

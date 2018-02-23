@@ -12,6 +12,10 @@ booking_register:
     requirements:
         id: \d+
 
-booking_payment:
-    path: /booking/payment
-    controller: App\Controller\Front\TicketingController::payment
+booking_checkout:
+    path: /booking/checkout/{id}
+    controller: App\Controller\Front\TicketingController::checkout
+
+booking_success:
+    path: /booking/success
+    controller: App\Controller\Front\TicketingController::paymentSuccess

@@ -48,6 +48,11 @@ class Ticket
     private $discount;
 
     /**
+     * @ORM\Column(type="integer", name="ticket_price")
+     */
+    private $price;
+
+    /**
      * @return mixed
      */
     public function getId()
@@ -158,6 +163,24 @@ class Ticket
     {
         $this->booking = $booking;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getPrice()
+    {
+        return $this->price;
+    }
+
+    /**
+     * @param mixed $price
+     */
+    public function setPrice($price): void
+    {
+        $this->price = $price;
+    }
+
+
 
 
 }
