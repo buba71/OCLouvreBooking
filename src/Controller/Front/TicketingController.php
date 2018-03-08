@@ -133,7 +133,7 @@ class TicketingController
         }
 
 
-        if (($request->get('stripeToken')) && !empty($_POST['card_name'])) {
+        if (isset($request->get('stripeToken') && !empty($_POST['card_name'])) {
             // If card is valide
             if ($stripePayment->stripePayment()) {
 
