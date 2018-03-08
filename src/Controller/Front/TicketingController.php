@@ -68,6 +68,9 @@ class TicketingController
                     $currentBooking->removeTicket($ticket);
                 }
             }
+        }
+
+
 
         $form = $formFactory->createBuilder(TicketsType::class, $currentBooking)->getForm();
         $form->handleRequest($request);
