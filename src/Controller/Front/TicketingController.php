@@ -28,9 +28,11 @@ class TicketingController
         $session = $request->getSession();
         if($session->has('booking')){
             $currentBooking = $session->get('booking');
+        } else {
+            $currentBooking = new Booking();
         }
 
-        $currentBooking = new Booking();
+
 
 
         $form = $formFactory->createBuilder(BookingType::class, $currentBooking)->getForm();
@@ -66,12 +68,6 @@ class TicketingController
                     $currentBooking->removeTicket($ticket);
                 }
             }
-
-        }else{
-            throw new \Exception('La session a expiré');
-        }
-
-
 
         $form = $formFactory->createBuilder(TicketsType::class, $currentBooking)->getForm();
         $form->handleRequest($request);
