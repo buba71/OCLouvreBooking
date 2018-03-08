@@ -2,8 +2,9 @@
 
 namespace App\Entity;
 
-use App\Validator\CheckDate;
-use App\Validator\CheckOverTickets;
+use App\Validator\Constraints\CheckDate;
+use App\Validator\Constraints\CheckOverTickets;
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -22,27 +23,40 @@ class Booking
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Ticket", mappedBy="booking", cascade={"persist"})
      */
+
+
     private $tickets;
 
     /**
      * @ORM\Column(type="date", name="booking_date")
+     * @Assert\NotBlank()
+     * @Assert\Date()
      * @CheckDate()
      */
     private $booking_date;
 
     /**
+     * @ORM\Column(type="integer", name="command_number")
+     */
+    private $commandNumber;
+
+    /**
      * @ORM\Column(type="boolean", name="booking_ticketCategory")
+     *@Assert\Type(type="bool")
      */
     private $ticketCategory;
 
     /**
      * @ORM\Column(type="string", name="booking_userMail")
+     * @Assert\NotBlank()
+     * @Assert\Email()
      */
     private $userMail;
 
     /**
      * @ORM\Column(type="integer", name="booking_ticketQuantity")
      * @CheckOverTickets()
+     * @Assert\NotNull()
      */
     private $ticketQuantity;
 
@@ -174,7 +188,21 @@ class Booking
         $this->tickets->removeElement($ticket);
     }
 
+    /**
+     * @return mixed
+     */
+    public function getCommandNumber()
+    {
+        return $this->commandNumber;
+    }
 
+    /**
+     * @param mixed $commandNumber
+     */
+    public function setCommandNumber($commandNumber): void
+    {
+        $this->commandNumber = $commandNumber;
+    }
 
 
 

@@ -27,15 +27,18 @@ class BookingType extends AbstractType
                 'format' => 'dd-MM-yyyy'
             ))
             ->add('ticketCategory',ChoiceType::class, array(
-                'choices' => array(
-                    'Journée' => true,
+                'choices'          => array(
+                    'Journée'      => true,
                     'Demi-journée' => false
                 ),
+                'label'   => 'Type de billet',
                 'expanded'=> true
             ))
-            ->add('userMail', EmailType::class)
+            ->add('userMail', EmailType::class, array(
+                'label'   =>'Votre adresse Mail',
+                'required'=> true
+            ))
             ->add('ticketQuantity', HiddenType::class)
-            ->add('nextStep', SubmitType::class)
         ;
     }
 

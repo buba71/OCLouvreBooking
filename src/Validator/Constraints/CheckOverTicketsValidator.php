@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Validator;
+namespace App\Validator\Constraints;
 
 use App\Entity\Booking;
 use Doctrine\ORM\EntityManagerInterface;
@@ -12,6 +12,8 @@ class CheckOverTicketsValidator extends ConstraintValidator
 {
     private $entityManager;
     private $request;
+
+    const TICKET_LIMIT = 1000;
 
     /**
      * CheckOverTicketsValidator constructor.
@@ -49,7 +51,7 @@ class CheckOverTicketsValidator extends ConstraintValidator
         }
 
         // If entries > 1000
-        if (($ticketsCounter + $value) > 1000){
+        if (($ticketsCounter + $value) > self::TICKET_LIMIT){
             $this->context->addViolation($constraint->message);
 
         }

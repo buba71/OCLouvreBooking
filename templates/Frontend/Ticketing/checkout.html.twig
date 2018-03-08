@@ -4,65 +4,159 @@
 {% block stylesheets%}
     {{ parent() }}
     <style>
+        .well
+        {
+            margin-top: 70px;
+            padding-left: 20px;
+            padding-bottom: 100px;
+            background-color: white;
+            box-shadow: -2px -2px 10px -5px black ;
+            border-radius: unset;
+        }
 
+        .breadcrumb
+        {
+            background-color: white;
+        }
+
+        .checkout
+        {
+            margin-top: 100px;
+            margin-right: 15px;
+        }
+
+
+        .form-row
+        {
+            width: auto;
+            max-width: 380px;
+            height: 200px;
+            margin-top: 10px;
+            margin-bottom: 15px;
+            margin-left: 20px;
+            margin-right: 20px;
+            padding: 20px;
+            border-radius: 5px;
+            border: 1px solid lightgray;
+        }
+
+        #commandRe
+
+        .btn-control
+        {
+            margin-right: 10px;
+        }
+
+        #booking_edit
+        {
+            color: inherit;
+        }
 
     </style>
+
 {% endblock %}
 
 
 
 {% block content %}
-<div class="container">
-    <div class="well" style="margin-top: 30px">
 
-        <div class="row">
-            <div class="col-sm-8">
-                <h4><strong>Votre commande</strong></h4>
+    <div class="container">
+        <div class="well">
+            <h1 style="text-align: center">Paiement</h1>
+            <!-- BreadCrumb-->
+            <ol class="breadcrumb" style="text-align: center">
+                <li><a href="#">Constituer votre panier</a></li>
+                <li><a href="#">Informations billets</a></li>
+                <li class="active">Paiement</li>
+            </ol>
+            <!-- Content-->
 
-                <span>Date de la visite: {{ bookingDate }}</span><br/>
-                <span>Votre adresse Mail: {{ mail }}</span><br/>
-                <span>Nombre de billets: {{ ticketQuantity }}</span><br/>
-                <span>Montant à règler: {{ amount }} euros</span><br/>
+            <div class="checkout row">
 
-                {% for flashMessage in app.session.flashbag.get('success') %}
-                    <div class="alert alert-danger">
-                        {{ flashMessage }}
+                <div  class="col-sm-8">
+
+                    <h3>Votre commande</h3>
+
+                    <span>Date de la visite: {{ bookingDate }}</span><br/>
+                    <span>Votre adresse Mail: {{ mail }} ( Vous recevrez vos billets à cette adresse ) </span><br/>
+                    <span>Montant total à règler:<strong> {{ amount }} euros</strong></span><br/>
+
+                    <div class="button_control">
+                        <a id="booking_edit" href="{{ path('booking_homepage') }}">
+                            <button type="button" class="btn btn-default" style="margin-top: 10px">Modifier ma commande</button>
+                        </a>
                     </div>
-                {% endfor %}
+                    <br/>
+                    {% for message in app.session.flashbag.get('error') %}
+                        <div class="alert alert-danger">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
 
-            </div>
-            <div class="col-sm-4">
-                <span><strong>Détails du prix:</strong></span>
-            </div>
-    </div>
-    <div class="row">
 
-        <form action="" method="post"  id="payment-form" style="max-width: 400px;background-color: #66afe9;padding: 10px;border-radius: 4px;margin-top: 20px" >
-            <div class="form-row">
-                <label for="card-name">
-                    Votre nom
-                </label>
-                <input type="text" name="card_name" class="form-control" id="card-name" placeholder="Votre nom" required>
-                <label for="card-element">
-                    Coordonnées bancaires
-                </label>
-                <div id="card-element" class="form-control">
-                    <!-- a Stripe Element will be inserted here. -->
                 </div>
+                <div class=" col-sm-4" id="details">
 
-                <!-- Used to display Element errors -->
-                <div id="card-errors" role="alert"></div>
+                    <h4>Détails du panier:</h4>
+                    <p>Nombre de billets: {{ ticketQuantity }}</p>
+                    <table class="table">
+                        <tbody>
+                        <tr>
+                            <td>Nom</td>
+                            <td>Prénom</td>
+                            <td>Tarif réduit</td>
+                            <td>Prix (euros)</td>
+                        </tr>
+                        {% for ticket in tickets %}
+                        <tr>
+
+                            <td>
+                                {{ ticket.guestFirstName }}
+                            </td>
+                            <td>
+                                {{ ticket.guestLastName }}
+                            </td>
+                            <td>
+                                {% if ticket.discount %}
+                                    oui
+                                {% else %}
+                                    non
+                                {% endif %}
+                            </td>
+                            <td>
+                                {{ ticket.price }}
+                            </td>
+                            {% endfor %}
+
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
+            <div class="row">
 
-            <button class="btn btn-primary" style="margin-top: 10px">Payer</button>
-            <button class="btn btn-primary" style="margin-top: 10px">Annuler</button>
-        </form>
+                <form action="" method="post"  id="payment-form" >
+                    <div class="form-row">
+                        <label for="card-name">
+                            Votre nom
+                        </label>
+                        <input type="text" name="card_name" class="form-control" id="card-name" placeholder="Votre nom" required>
+                        <label for="card-element">
+                            Coordonnées bancaires
+                        </label>
+                        <div id="card-element" class="form-control">
+                            <!-- a Stripe Element will be inserted here. -->
+                        </div>
+
+                        <!-- Used to display Element errors -->
+                        <div id="card-errors" role="alert"></div>
+                        <button type="submit" class="btn btn-default" style="margin-top: 10px">Payer {{ amount }} euros</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
     </div>
-    </div>
-</div>
-
-
-
 
 {% endblock %}
 

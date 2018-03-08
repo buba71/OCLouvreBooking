@@ -2,9 +2,10 @@
 
 namespace App\Form;
 
-use App\Entity\Tickets;
+use App\Entity\Booking;
 use App\Form\TicketType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ButtonType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -16,11 +17,18 @@ class TicketsType extends AbstractType
     {
         $builder
             ->add('tickets', CollectionType::class, array(
-                'entry_type' => TicketType::class,
-                'allow_add'  => true,
+                'entry_type'   => TicketType::class,
+                'prototype'    => true,
+                'allow_add'    => true,
+                'by_reference' => false,
+                'label'  =>false
+
+
+
+
 
             ))
-            ->add('NextStep', SubmitType::class)
+
         ;
     }
 
@@ -28,7 +36,7 @@ class TicketsType extends AbstractType
     {
         $resolver->setDefaults([
             // uncomment if you want to bind to a class
-            'data_class' => null,
+            'data_class' => Booking::class
         ]);
     }
 }

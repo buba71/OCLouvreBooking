@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use App\Validator\Constraints\CheckBirthDate;
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -24,31 +26,40 @@ class Ticket
 
     /**
      * @ORM\Column(type="string", name="ticket_GuestFirstName")
+     * @Assert\NotBlank()
+     * @Assert\Length(min="3", minMessage=" Votre Prénom n'est pas valide. Il doit contenir au moins 3 caractères")
      */
     private $guestFirstName;
 
     /**
      * @ORM\Column(type="string", name="ticket_GuestLastName")
+     * @Assert\NotBlank()
+     * @Assert\Length(min="3", minMessage="Votre Nom n'est pas valide. Il doit contenir au moins 3 caractères")
      */
     private $guestLastName;
 
     /**
      * @ORM\Column(type="string", name="ticket_guestCountry")
+     * @Assert\Country(message="Le pays n'est pas valide.")
      */
     private $guestCountry;
 
     /**
      * @ORM\Column(type="date", name="ticket_guestBirthDate")
+     * @Assert\Date()
+     * @CheckBirthDate()
      */
     private $guestBirthDate;
 
     /**
      * @ORM\Column(type="boolean", name="ticket_discount")
+     * @Assert\Type(type="bool")
      */
     private $discount;
 
     /**
      * @ORM\Column(type="integer", name="ticket_price")
+     * @Assert\Type(type="integer")
      */
     private $price;
 

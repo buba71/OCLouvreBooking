@@ -18,11 +18,11 @@ class Mailing
         $this->twig = $twig;
     }
 
-    public function sendMail()
+    public function sendMail($userMail)
     {
         $message = (new \Swift_Message())
             ->setFrom('d.delima@outlook.fr')
-            ->setTo('davdelima71@gmail.com')
+            ->setTo($userMail)
             ->setBody($this->twig->render('Frontend/Ticketing/email.html.twig'), 'text/html');
 
 

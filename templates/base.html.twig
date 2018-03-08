@@ -3,11 +3,29 @@
     <head>
         <meta charset="UTF-8">
 
+
         <title>{% block title %}Accueil{% endblock %}</title>
         {% block stylesheets %}
             <link rel="stylesheet" href="{{ asset('build/css/app.css') }}">
             <link rel="stylesheet" href="{{ asset('build/css/custom.css') }}">
             <link rel="stylesheet" href="{{ asset('build/css/bootstrap-datepicker3.css') }}">
+            <style>
+                body
+                {
+                    background-color: lightgray;
+                    padding-bottom: 0;
+                }
+
+                .navbar-nav
+                {
+                    margin-right: 5px;
+                }
+
+                .btn-control,.btn-action
+                {
+                    background-color: lightgray;
+                }
+            </style>
         {% endblock %}
     </head>
     <body>
@@ -139,10 +157,12 @@
             </div>
         </div>
         </div>
+
     {% endblock %}
 
-        <footer>
-            <div class="panel-footer" style="text-align: right">
+
+        <footer style="margin-bottom: 0;padding-bottom: 0">
+            <div class="panel-footer" style="text-align: right;margin-bottom:0">
                 <span>Copyright<i class="fa fa-copyright fa-lg"></i></span>
             </div>
         </footer>

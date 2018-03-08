@@ -7,15 +7,16 @@ booking_homepage:
     controller: App\Controller\Front\TicketingController::booking
 
 booking_register:
-    path: /booking/register/{id}
+    path: /booking/register
     controller: App\Controller\Front\TicketingController::register
     requirements:
         id: \d+
 
 booking_checkout:
-    path: /booking/checkout/{id}
+    path: /booking/checkout
     controller: App\Controller\Front\TicketingController::checkout
 
 booking_success:
     path: /booking/success
     controller: App\Controller\Front\TicketingController::paymentSuccess
+
