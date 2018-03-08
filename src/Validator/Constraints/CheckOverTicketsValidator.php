@@ -46,7 +46,6 @@ class CheckOverTicketsValidator extends ConstraintValidator
         foreach ($listBooking as $booking){
 
             $addCount = count($booking->getTickets());
-            echo $addCount.'<br/>';
             $ticketsCounter += $addCount;
         }
 

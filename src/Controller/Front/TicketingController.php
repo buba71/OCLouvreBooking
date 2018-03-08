@@ -23,15 +23,15 @@ use Twig\Environment;
 class TicketingController
 {
 
-    public function booking(Environment $twig, FormFactoryInterface $formFactory, RouterInterface $router, Request $request, EntityManagerInterface $entityManager): Response
+    public function booking(Environment $twig, FormFactoryInterface $formFactory, RouterInterface $router, Request $request): Response
     {
         $session = $request->getSession();
         if($session->has('booking')){
             $currentBooking = $session->get('booking');
-        }else{
-
-            $currentBooking = new Booking();
         }
+
+        $currentBooking = new Booking();
+
 
         $form = $formFactory->createBuilder(BookingType::class, $currentBooking)->getForm();
         $form->handleRequest($request);
@@ -107,17 +107,19 @@ class TicketingController
         )));
     }
 
-    public function checkout (Environment $twig, RouterInterface $router, Request $request, FlashBagInterface $flashBag, StripePayment $stripePayment):Response
+    public function checkout (Environment $twig, RouterInterface $router, Request $request, StripePayment $stripePayment):Response
     {
         $session = $request->getSession();
         $currentBooking = $session->get('booking');
 
-        if (($request->get('stripeToken')) && !empty($_POST['card_name'])) {
+
+
+        if (($request->get('stripeToken')) && ($request->get('card_name'))) {
             // If card is valide
             if ($stripePayment->stripePayment()) {
 
                 $url = $router->generate('booking_success');
-                return new RedirectResponse($router->generate('booking_success'));
+                return new RedirectResponse($url);
             }
         }
 
@@ -132,6 +134,7 @@ class TicketingController
 
     public function paymentSuccess(EntityManagerInterface $entityManager, Environment $twig, Mailing $mailer, Request $request):Response
     {
+
         $currentBooking = $request->getSession()->get('booking');
         $commandNumber = $currentBooking->getCommandNumber();
         $bookingDate = $currentBooking->getBookingDate()->format('d/m/Y');

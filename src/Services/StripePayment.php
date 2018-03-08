@@ -48,7 +48,7 @@ class StripePayment
                 ));
 
                 // Submit the payment
-                $charge = \Stripe\Charge::create(array(
+                \Stripe\Charge::create(array(
                     "amount" => $currentBooking->getAmount() * 100,
                     "currency" => "eur",
                     "description" => "Example charge",
