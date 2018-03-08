@@ -13,6 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Booking
 {
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -64,6 +65,7 @@ class Booking
      * @ORM\Column(type="integer", name="booking_amount")
      */
     private $amount;
+
 
     public function __construct()
     {
@@ -203,8 +205,6 @@ class Booking
     {
         $this->commandNumber = $commandNumber;
     }
-
-
 
 
 }

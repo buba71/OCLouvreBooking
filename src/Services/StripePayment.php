@@ -60,7 +60,7 @@ class StripePayment
 
             } catch (\Stripe\Error\Card $e) {
                 $error = 'there was a problem charging your card: ' . $e->getMessage();
-                $this->flashBag->add('error', $error);
+                $this->flashBag->add('error', 'Un problème est survenu. Veuillez vérifier vos coordonnées bancaires.');
             }
             return false;
         }

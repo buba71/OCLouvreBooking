@@ -22,17 +22,7 @@ use Twig\Environment;
 
 class TicketingController
 {
-    /**
-     * @param Environment $twig
-     * @param FormFactoryInterface $formFactory
-     * @param RouterInterface $router
-     * @param Request $request
-     * @param EntityManagerInterface $entityManager
-     * @return Response
-     * @throws \Twig_Error_Loader
-     * @throws \Twig_Error_Runtime
-     * @throws \Twig_Error_Syntax
-     */
+
     public function booking(Environment $twig, FormFactoryInterface $formFactory, RouterInterface $router, Request $request, EntityManagerInterface $entityManager): Response
     {
         $session = $request->getSession();
@@ -65,12 +55,14 @@ class TicketingController
 
         if($session->has('booking')){
             $currentBooking = $session->get('booking');
-            $sessionTickets = $currentBooking->getTickets();
+            $tickets = $currentBooking->getTickets();
+            $ticketQuantity = $currentBooking->getTicketQuantity();
+
             // Convert to an array for condition
-            $sessionTicketsToArray = (array)$sessionTickets;
+            $ticketsToArray = (array)$tickets;
             // If request come from Checkout for editing, remove session tickets
-            if (!empty(array_filter($sessionTicketsToArray) )) {
-                foreach ($sessionTickets as $ticket){
+            if (!empty(array_filter($ticketsToArray) )) {
+                foreach ($tickets as $ticket){
                     $currentBooking->removeTicket($ticket);
                 }
             }
@@ -79,47 +71,40 @@ class TicketingController
             throw new \Exception('La session a expiré');
         }
 
-        $ticketQuantity = $currentBooking->getTicketQuantity();
+
 
         $form = $formFactory->createBuilder(TicketsType::class, $currentBooking)->getForm();
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+            if ($form->isSubmitted() && $form->isValid()) {
 
-            $tickets = $currentBooking->getTickets();
-            $bookingAmount = 0;
+                $bookingAmount = 0;
+                foreach ($tickets as $ticket) {
+                    $errors = $validator->validate($ticket);
+                    if (count($errors) > 0) {
+                        $errorString = (string)$errors;
+                        $flashBag->add('info', $errorString);
 
+                        $url = $router->generate('booking_register');
+                        return new RedirectResponse($url);
+                    }
 
-            foreach ($tickets as $ticket)
-            {
-                $errors = $validator->validate($ticket);
-                if  (count($errors) > 0){
-                    $errorString = (string)$errors;
-                    $flashBag->add('info',$errorString );
-
-                    $url = $router->generate('booking_register');
-                    return new RedirectResponse($url);
+                    $ticketPrice = $priceCalculator->calculating($ticket);
+                    $bookingAmount += $ticketPrice;
                 }
 
-                $ticketPrice = $priceCalculator->calculating($ticket);
-                $bookingAmount += $ticketPrice;
+                $currentBooking->setAmount($bookingAmount);
+                $currentBooking->setCommandNumber($codeGenerator->sendCodeCommand());
+
+                $url = $router->generate('booking_checkout');
+                return new RedirectResponse($url);
             }
 
-            $currentBooking->setAmount($bookingAmount);
-            $currentBooking->setCommandNumber($codeGenerator->sendCodeCommand());
-
-
-            $url = $router->generate('booking_checkout');
-            return new RedirectResponse($url);
-
-        }
 
         return new Response($twig->render('Frontend/Ticketing/register.html.twig', array(
             'ticketQuantity' => $ticketQuantity,
             'form' => $form->createView(),
         )));
-
-
     }
 
     public function checkout (Environment $twig, RouterInterface $router, Request $request, FlashBagInterface $flashBag, StripePayment $stripePayment):Response
@@ -127,18 +112,11 @@ class TicketingController
         $session = $request->getSession();
         $currentBooking = $session->get('booking');
 
-
-        if ($currentBooking->status == PAID){
-
-        }
-
-
-        if (isset($request->get('stripeToken') && !empty($_POST['card_name'])) {
+        if (($request->get('stripeToken')) && !empty($_POST['card_name'])) {
             // If card is valide
             if ($stripePayment->stripePayment()) {
 
                 $url = $router->generate('booking_success');
-
                 return new RedirectResponse($router->generate('booking_success'));
             }
         }
