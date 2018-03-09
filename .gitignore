@@ -1,9 +1,9 @@
 ###> symfony/framework-bundle ###
-
 /public/bundles/
 /var/
 /vendor/
 ###< symfony/framework-bundle ###
+
 ###PHPStorm###
 /.idea
 /.git
@@ -19,3 +19,8 @@
 ###> symfony/web-server-bundle ###
 .web-server-pid
 ###< symfony/web-server-bundle ###
+
+###> symfony/migrations###
+/src/Migrations/
+###> symfony/Migrations###
+

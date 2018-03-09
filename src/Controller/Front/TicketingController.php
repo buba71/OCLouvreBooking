@@ -70,8 +70,6 @@ class TicketingController
             }
         }
 
-
-
         $form = $formFactory->createBuilder(TicketsType::class, $currentBooking)->getForm();
         $form->handleRequest($request);
 
