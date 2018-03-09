@@ -21,6 +21,6 @@
 ###< symfony/web-server-bundle ###
 
 ###> symfony/migrations###
-/Migrations/
+/src/Migrations/
 ###> symfony/Migrations###
 
