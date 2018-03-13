@@ -15,6 +15,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Twig\Environment;
@@ -22,6 +23,11 @@ use Twig\Environment;
 
 class TicketingController
 {
+
+    public function index(Environment $twig)
+    {
+        return new Response($twig->render('Base.html.twig'));
+    }
 
     public function booking(Environment $twig, FormFactoryInterface $formFactory, RouterInterface $router, Request $request): Response
     {
@@ -31,9 +37,6 @@ class TicketingController
         } else {
             $currentBooking = new Booking();
         }
-
-
-
 
         $form = $formFactory->createBuilder(BookingType::class, $currentBooking)->getForm();
         $form->handleRequest($request);
@@ -69,6 +72,8 @@ class TicketingController
                 }
             }
         }
+
+
 
         $form = $formFactory->createBuilder(TicketsType::class, $currentBooking)->getForm();
         $form->handleRequest($request);
@@ -109,8 +114,6 @@ class TicketingController
         $session = $request->getSession();
         $currentBooking = $session->get('booking');
 
-
-
         if (($request->get('stripeToken')) && ($request->get('card_name'))) {
             // If card is valide
             if ($stripePayment->stripePayment()) {
@@ -140,10 +143,7 @@ class TicketingController
         $entityManager->persist($currentBooking);
         $entityManager->flush();
         $request->getSession()->remove('booking');
-
-
         $mailer->sendMail($userMail);
-
 
         return new Response($twig->render('Frontend/Ticketing/succeed.html.twig',array(
             'commandNumber' => $commandNumber,
@@ -151,4 +151,5 @@ class TicketingController
             'userMail'      => $userMail
         )));
     }
+
 }

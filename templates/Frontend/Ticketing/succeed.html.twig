@@ -32,7 +32,7 @@
 {% block content %}
     <div class="container">
         <div class="well">
-            <h1 style="text-align: center">Paiement accepté !</h1>
+            <h1 style="text-align: center">Paiement accepté.</h1>
             <div class="row" >
 
                 <div class="col-sm-4 col-sm-offset-4" id="success">
@@ -41,7 +41,11 @@
                 N° de commande : {{ commandNumber }}<br/>
                 </p>
                 Un email contenant vos billets vient d'être envoyé à l' adresse suivante :<br/>
-                    <strong>{{ userMail }}</strong>
+                    <strong>{{ userMail }}</strong><br />
+
+                    <p> Nous vous souhaitons une agréable visite.<br />
+                        A bientôt.
+                    </p>
                 <p style="margin-top: 20px">
                 <a href="{{ path('index') }}">
                     <button type="button" class="btn btn-default">Retour à la page d'acceuil</button>

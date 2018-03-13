@@ -1,6 +1,6 @@
 index:
     path: /
-    controller: App\Controller\Front\MainController::index
+    controller: App\Controller\Front\TicketingController::index
 
 booking_homepage:
     path: /booking
@@ -19,4 +19,6 @@ booking_checkout:
 booking_success:
     path: /booking/success
     controller: App\Controller\Front\TicketingController::paymentSuccess
+
+
 

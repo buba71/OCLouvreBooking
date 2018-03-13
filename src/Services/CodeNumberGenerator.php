@@ -14,13 +14,13 @@ use Doctrine\ORM\EntityManagerInterface;
  */
 class CodeNumberGenerator
 {
-    private $emanager;
+    private $eManager;
 
 
 
     public function __construct(EntityManagerInterface $entityManager)
     {
-        $this->emanager = $entityManager;
+        $this->eManager = $entityManager;
     }
 
     /**
@@ -29,7 +29,7 @@ class CodeNumberGenerator
      */
     protected function isCodeExist(int $code):bool
     {
-        $query = $this->emanager->getRepository(Booking::class)->findOneBy(array('commandNumber' => $code));
+        $query = $this->eManager->getRepository(Booking::class)->findOneBy(array('commandNumber' => $code));
 
         if (!$query){
             return true;
