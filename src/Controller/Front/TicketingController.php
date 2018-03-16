@@ -26,7 +26,7 @@ class TicketingController
 
     public function index(Environment $twig)
     {
-        return new Response($twig->render('Base.html.twig'));
+        return new Response($twig->render('base.html.twig'));
     }
 
     public function booking(Environment $twig, FormFactoryInterface $formFactory, RouterInterface $router, Request $request): Response

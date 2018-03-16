@@ -9,7 +9,7 @@ class TicketingControllerTest extends WebTestCase
     public function testBookingHomePage()
     {
         $client = static::createClient();
-        $client->followRedirects();
+
         $crawler = $client->request('GET','/booking');
 
         $form = $crawler->selectButton('Valider')->form();
@@ -20,12 +20,10 @@ class TicketingControllerTest extends WebTestCase
         $form['booking[ticketQuantity]'] = 1;
         $client->submit($form);
 
+        $client->followRedirect();
+
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
-
-
-
-
 
     }
 

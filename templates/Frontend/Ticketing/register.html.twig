@@ -18,8 +18,8 @@
     {% spaceless %}
         <div class="panel panel-default col-sm-6">
             <h4>{{- form_label(form) -}}</h4>
-            {{- form_widget(form) -}}
-            {{- form_errors(form) -}}
+                {{- form_widget(form) -}}
+                {{- form_errors(form) -}}
         </div>
     {% endspaceless %}
 {%- endblock form_row -%}
@@ -32,6 +32,7 @@
         .well
         {
             margin-top: 70px;
+            min-width: 330px;
             background-color: white;
             box-shadow: 2px 2px 10px -5px black;
             border-radius: unset;
@@ -125,13 +126,14 @@
 
             <div class="register row">
 
+
                 <div class=" ticket_form col-sm-8">
                     {% for message in app.session.flashbag.get('info') %}
                         <div class="alert alert-danger">
                             {{ message }}
                         </div>
                     {% endfor %}
-
+                    <div class="row">
                         {{ form_start(form) }}
                         {{ form_label(form) }}
                         {{ form_widget(form) }}
@@ -147,6 +149,7 @@
                         </a>
                         {{ form_end(form) }}
 
+                </div>
                 </div>
                 <div class="caddie col-sm-4">
                     <div style="" id ="caddie_display" data-ticket = "{{ ticketQuantity }}">
@@ -183,7 +186,7 @@
                         </dl>
                         <div class="note">
                             L'entrée est gratuite pour les enfants de moin de 3 ans.<br/>
-                            Le <em>tarif réduit</em> est valable pour les étudiants, chomeurs et militaires (Un justificatif peut être demandé le jour de la visite).
+                            Le tarif réduit est valable pour les étudiants, chomeurs et militaires (Un justificatif peut être demandé le jour de la visite).
                         </div>
                     </div>
                 </div>
