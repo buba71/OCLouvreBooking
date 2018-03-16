@@ -121,18 +121,20 @@
 
                     <div id="">
                         {{ form_start(form) }}
-                        <div>{{ form_errors(form) }}</div>
                         <div id="booking_date">
                             {{ form_label(form.bookingDate) }}
                             {{ form_widget(form.bookingDate) }}
+                            {{ form_errors(form.bookingDate) }}
                         </div>
                         <div id="ticket_category">
                             {{ form_label(form.ticketCategory) }}
                             {{ form_widget(form.ticketCategory) }}
+                            {{ form_errors(form.ticketCategory) }}
                         </div>
                         <div id="booking_mail">
                             {{ form_label(form.userMail) }}
                             {{ form_widget(form.userMail) }}
+                            {{ form_errors(form.userMail) }}
                         </div>
 
                         <div id="booking_control">
