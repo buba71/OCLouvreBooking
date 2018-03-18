@@ -3,7 +3,7 @@
 /var/
 /vendor/
 ###< symfony/framework-bundle ###
-/.env
+/env
 
 ###PHPStorm###
 /.idea
