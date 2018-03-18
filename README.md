@@ -1,5 +1,6 @@
 # OCLouvreBooking
-Billetterie en ligne pour le musée du Louvre
+
+A ticketting project for the Louvre museum.
 
 
 A Symfony 4 project with Yarn, Webpack and bootstrap sass
