@@ -46,6 +46,7 @@ class Ticket
 
     /**
      * @ORM\Column(type="date", name="ticket_guestBirthDate")
+     * @Assert\NotBlank()
      * @Assert\Date()
      * @CheckBirthDate()
      */

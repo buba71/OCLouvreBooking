@@ -19,11 +19,11 @@ class TicketType extends AbstractType
         $builder
             ->add('guestFirstName', TextType::class, array(
                 'label'=>'Prénom',
-                'attr' => array('class' => 'prenom')
+                'attr' => array('class' => 'prenom', 'placeholder' => 'Votre prénom')
             ))
             ->add('guestLastName', TextType::class, array(
                 'label'=>'Nom',
-                'attr' => array('class' => 'Nom')
+                'attr' => array('class' => 'Nom', 'placeholder' => 'Votre nom')
             ))
             ->add('guestCountry', CountryType::class,array(
                 'label'=>'Pays de résidence',
@@ -31,8 +31,10 @@ class TicketType extends AbstractType
             ) )
             ->add('guestBirthDate', DateType::class, array(
                 'widget' => 'single_text',
+                'html5'  => false,
                 'label'  => 'Date de naissance',
-                'attr'   => array('class', 'Daten'),
+                'format' => 'dd/MM/yyyy',
+                'attr'   => array('class' => 'Daten', 'placeholder' => 'JJ/MM/AAAA'),
 
             ))
             ->add('discount', CheckboxType::class,array(

@@ -87,12 +87,17 @@
                         </a>
                     </div>
                     <br/>
+
+                    <hr>
+                    <p>
+                        Afin de tester le formulaire de paiement, utiliser le numéro de carte suivant: 4242 4242 4242 4242
+                    </p>
+
                     {% for message in app.session.flashbag.get('error') %}
                         <div class="alert alert-danger">
                             {{ message }}
                         </div>
                     {% endfor %}
-
 
                 </div>
                 <div class=" col-sm-4" id="details">
@@ -134,6 +139,7 @@
                 </div>
             </div>
             <div class="row">
+
 
                 <form action="" method="post"  id="payment-form" >
                     <div class="form-row">

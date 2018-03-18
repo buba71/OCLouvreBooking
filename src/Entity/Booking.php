@@ -24,8 +24,6 @@ class Booking
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Ticket", mappedBy="booking", cascade={"persist"})
      */
-
-
     private $tickets;
 
     /**
@@ -43,7 +41,7 @@ class Booking
 
     /**
      * @ORM\Column(type="boolean", name="booking_ticketCategory")
-     *@Assert\Type(type="bool")
+     * @Assert\Type(type="bool")
      */
     private $ticketCategory;
 

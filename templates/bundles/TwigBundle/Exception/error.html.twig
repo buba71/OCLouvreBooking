@@ -1,8 +1,8 @@
-{% extends 'base.html.twig' %}
-
+{% extends'base.html.twig' %}
 
 {% block stylesheets %}
     {{ parent() }}
+
     <style>
 
         .well
@@ -16,7 +16,7 @@
             padding-right:50px;
         }
 
-        #mail
+        #error
         {
             margin-top: 100px;
             padding: 30px;
@@ -26,22 +26,18 @@
 
     </style>
 
-
 {% endblock %}
-{% block title %}{% endblock %}
 
 {% block content %}
+
     <div class="container">
         <div class="well">
-            <h1 style="text-align: center">Paiement accepté.</h1>
+            <h1 style="text-align: center">Une erreur est survenue...</h1>
             <div class="row" >
 
-                <div class="col-sm-4 col-sm-offset-4" id="mail">
+                <div class="col-sm-4 col-sm-offset-4" id="error">
                     <p>
-                     Mail envoyé !!
-                    </p>
-                    <p> L'équipe du Louvre vous souhaite une agréable visite.<br />
-                        A bientôt.
+                        Nous sommes désolé. Une erreur inattendue s'est produite.
                     </p>
                     <p style="margin-top: 20px">
                         <a href="{{ path('index') }}">
@@ -54,6 +50,5 @@
 
         </div>
     </div>
-
 
 {% endblock %}

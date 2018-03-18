@@ -23,7 +23,7 @@ class BookingType extends AbstractType
                 'label'  => 'Date de réservation',
                 'widget' => 'single_text',
                 'html5'  => false,
-                'attr'   => array('class' => 'datepicker'),
+                'attr'   => array('class' => 'datepicker', 'placeholder' => 'JJ-MM-AAAA'),
                 'format' => 'dd-MM-yyyy'
             ))
             ->add('ticketCategory',ChoiceType::class, array(
@@ -36,7 +36,8 @@ class BookingType extends AbstractType
             ))
             ->add('userMail', EmailType::class, array(
                 'label'   =>'Votre adresse Mail',
-                'required'=> true
+                'required'=> true,
+                'attr'    => array('placeholder' => 'exemple@mail.fr'),
             ))
             ->add('ticketQuantity', HiddenType::class)
         ;
