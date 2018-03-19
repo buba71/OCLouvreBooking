@@ -152,11 +152,4 @@ class TicketingController
         )));
     }
 
-    public function testMail(Environment $twig, Mailing $mailer)
-    {
-        $mailer->sendMail('d.delima@outlook.fr');
-        return new Response($twig->render('Frontend/Ticketing/email.html.twig'));
-
-    }
-
 }

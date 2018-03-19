@@ -20,7 +20,5 @@ booking_success:
     path: /booking/success
     controller: App\Controller\Front\TicketingController::paymentSuccess
 
-test-mail:
-    path: /mail
-    controller: App\Controller\Front\TicketingController::testMail
+
 
